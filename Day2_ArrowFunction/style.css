@@ -1,0 +1,10 @@
+.btn{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.shapeSvg{
+    display: flex;
+}

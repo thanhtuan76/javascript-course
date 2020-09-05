@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>IndexHTML1</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+  <script type="module" src="main.js"></script>
+  <script>
+    function init() {
+      window.displayCategory(cat => {
+        return `<li class="nav-item">
+                <a class="nav-link" onclick="window.displayItems(window.itemDefault ,${cat.id})" href="#">${cat.name}</a>
+                </li>`;
+      });
+
+      // window.displayItems(item => {
+      //     return `<tr>
+      //     <td>${item.id}</td>
+      //     <td>${item.name}</td>
+      //     <td>${item.amount}</td>
+      //     <td>${item.createdDate}</td>
+      //     <td>${item.category}</td>
+      // </tr>`
+      // });
+    }
+  </script>
+</head>
+
+<body onload="init()">
+  <nav class="navbar navbar-expand-sm bg-light">
+    <ul class="navbar-nav" id="cateId">
+    </ul>
+  </nav>
+
+  <section>
+    <table class="table" id="itemId">
+
+    </table>
+  </section>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="init()">
+    <div>
+        <span id="clock">...</span>
+    </div>
+
+    <div>
+        <input type="input" id="colorId" placeholder="Input color...">
+        <input type="button" value="Add Color" onclick="addColor()">
+    </div>
+    <div id="colorArea">
+        <input class="btn" type="button" style="background-color: red;" onclick="fillColor(this)">
+        <input class="btn" type="button" style="background-color: green;" onclick="fillColor(this)">
+        <input class="btn" type="button" style="background-color: blue;" onclick="fillColor(this)">
+    </div>
+
+    <div>
+        <input type="radio" name="shape" rel="1" onclick="showShape(this)" checked> Ellipse
+        <input type="radio" name="shape" rel="2" onclick="showShape(this)"> Circle
+        <input type="radio" name="shape" rel="3" onclick="showShape(this)"> Rectangle
+    </div>
+    <div class="shapeSvg">
+        <div>
+            <svg height="140" width="500">
+                <ellipse cx="200" cy="80" rx="100" ry="50" fill="yellow" />
+            </svg>
+        </div>
+    
+        <div>
+            <svg>
+                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+            </svg>
+        </div>
+    
+        <div>
+            <svg width="400" height="110">
+                <rect width="300" height="100" fill="blue" />
+            </svg>
+        </div>
+    </div>
+
+
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

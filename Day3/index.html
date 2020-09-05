@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#loadId').click(() =>{
+                $.ajax({
+                    url: "https://5f0454058b06d60016dde60b.mockapi.io/api/category"
+                }).done((res) => {
+                    console.info(res);
+                    let d = document.querySelector(".cateId");
+                    res.forEach(element => {
+                       d.innerHTML += `<li>Id:${element.id} Name:${element.name}</li>` 
+                    });
+                }).fail((err) => {
+                    console.err(err);
+                });
+            });
+
+            $("#addId").click(() => {
+                $.ajax ({
+                    url: "https://5f0454058b06d60016dde60b.mockapi.io/api/category",
+                    type: "post",
+                    data: {
+                        name: $("#nameId").val()
+                    }
+                }).done((res) => {
+                    alert("Successful");
+                }).fail((err) => {
+                    console.err(err);
+                })
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" id="loadId" value="Load Category"/>
+    <div>
+        <input type="text" id="nameId" placeholder="Cate Name..." />
+        <input type="button" id="addId" value="Add Category" />
+    </div>
+    <ul class="cateId">
+
+    </ul>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    function init() {
+      fetch("http://127.0.0.1:5000/question").then(res => res.json()).then(data =>{
+        question = data
+        show(question[0])
+      })
+    } 
+
+    function show(question) {
+      let q = document.getElementById("content")
+      q.innerText = question.content
+
+      
+      fetch("http://127.0.0.1:5000/question/" + question.id).then(res => res.json()).then(data => {
+        let choices = document.getElementById("choice")
+        choices = innerHTML = "";
+
+        data.forEach(c => {
+          choices.innerHTML += `<li><input type='radio' data='${c.id}' name='choice' />${c.content}</li>`
+        })
+      })
+    }
+  </script>
+</head>
+<body onload="init()">
+
+  <h3 id="content"></h3>
+  <ul id="choice">
+
+  </ul>
+
+  <input type="button" >
+  <!-- <table>
+    <tr>
+      <td></td>
+    </tr>
+  </table> -->
+</body>
+</html>

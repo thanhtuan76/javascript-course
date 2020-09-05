@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DEMO</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(() => {
+            async function loadData() {
+                console.info("=== AWAIT & ASYNC")
+                const d = await fetch("https://5f0454058b06d60016dde60b.mockapi.io/api/dicts");
+                const res = await d.json();
+
+                console.info(res);
+                console.info("DONE");
+            }
+
+            // loadData();
+
+            async function postData() {
+                console.info("=== AWAIT & ASYNC 2")
+                const re = await fetch('https://5f0454058b06d60016dde60b.mockapi.io/api/dicts', {
+                    method: "POST",
+                    body: JSON.stringify({
+                        word: "test",
+                        vi_mean: "kiem tra"
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(res => res.json()).then(res => console.info(res)).catch(err => console.error(err));
+
+                console.info(re);
+                console.info("DONE");
+            }
+            // fetch("https://5f0454058b06d60016dde60b.mockapi.io/api/dicts").then(res => {
+            //     console.info(res);
+            // })
+
+            // fetch("https://5f0454058b06d60016dde60b.mockapi.io/api/dicts").then(res => res.json()).then(d => {
+            //     let msg = "";
+            //         d.forEach(element => {
+            //             msg += `<li>${element.word}: ${element.vi_mean}</li>`
+            //         });
+            //         $("#dictsId").html(msg);
+            // });
+
+            $("#btnload").click(() => {
+                $.ajax({
+                    url: "https://5f0454058b06d60016dde60b.mockapi.io/api/dicts"
+                }).done(res => {
+                    let msg = "";
+                    res.forEach(element => {
+                        msg += `<li>${element.word}: ${element.vi_mean}</li>`
+                    });
+                    $("#dictsId").html(msg);
+                }).fail(err => {
+                    console.error(err);
+                });
+            });
+
+            $("#loadId").click(() => {
+                $.ajax("words.json").done(res => {
+                    let msg = "";
+                    for (let w in res)
+                        msg += `<li>${w}: ${res[w]}</li>`
+                    $("#wordsId").html(msg);
+                }).fail(err => {
+
+                });
+            });
+
+            let addWord = (w, vi) => {
+                $.ajax({
+                    url: "https://5f0454058b06d60016dde60b.mockapi.io/api/dicts",
+                    type: "post",
+                    data: {
+                        word: w,
+                        vi_mean: vi
+                    }
+                }).done(res => {
+                    console.info(res);
+                }).fail(err => {
+                    console.error(err);
+                })
+            }
+
+            $("#fetchId").click(() => {
+                postData()
+                // fetch('https://5f0454058b06d60016dde60b.mockapi.io/api/dicts',{
+                //     method: "POST",
+                //     body: JSON.stringify({
+                //         word: "test",
+                //         vi_mean: "kiem tra"
+                //     }),
+                //     headers: {
+                //         "Content-Type": "application/json"
+                //     }
+                // }).then(res => res.json()).then(res => console.info(res)).catch(err => console.error(err));
+            });
+
+            $("#addId").click(() => {
+                $.ajax("words.json").done(res => {
+                    for (let w in res)
+                        addWord(w, res[w]);
+                }).fail(err => {
+
+                });
+            });
+
+            let pro = [];
+            $("#showProducts").click(() => {
+                filterUniqueProductS();
+
+            }); loadProducts();
+            async function loadProducts() {
+                console.info("=== AWAIT & ASYNC 3 ===")
+                const d = await fetch("products.json");
+                const res = await d.json();
+
+                let msg = "";
+                res.forEach(p => {
+                    pro.push(p);
+                    msg += `<li>${p.id}: ${p.name}</li>`
+                })
+
+                $("#productId").html(msg);
+                console.info(res);
+                console.info("DONE");
+            }
+            function filterUniqueProductS(filterCalBack) {
+                let kq = pro.reduce((re, p) => {
+                    if (!re.some(r => filterCalBack(r, p)))
+                        re.push(p);
+                    return re;
+                }, []);
+                console.info(kq);
+            }
+            let filterById = (p1, p2) => p1.id == p2.id;
+            let filterByName = (p1, p2) => p1.name == p2.name;
+        });
+    </script>
+</head>
+
+<body>
+    <input type="button" value="LOAD DICTS" id="btnload" />
+    <ul id="dictsId"></ul>
+    <br>
+    <hr>
+    <input type="button" value="LOAD ID" id="loadId" />
+    <ul id="wordsId"></ul>
+    <br>
+    <hr>
+    <input type="button" value="LOAD JSON" id="addId" />
+    <br>
+    <br>
+    <hr>
+    <input type="button" value="FETCH DEMO" id="fetchId" />
+    <br>
+    <br>
+    <hr>
+    <input type="button" value="SHOW PRODUCTS" id="showProducts" />
+    <ul id="productId"></ul>
+    <br>
+</body>
+
+</html>

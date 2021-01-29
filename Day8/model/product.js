@@ -9,7 +9,7 @@ class Product {
 
   static addProduct(product, callback) {
     let sql = "INSERT INTO product(name, price, category_id) VALUES"
-    conn.query(sql, (product.name, product.price, product.cateId), (err, data) => callback(err, data))
+    conn.query(sql, (product.name, parseFloat(product.price), product.cateId), (err, data) => callback(err, data))
   }
 
 

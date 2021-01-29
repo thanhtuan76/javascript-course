@@ -1,0 +1,20 @@
+var, let, const differenciate
+
+*Javacript closure (Nắm cơ chế, lồng hàm con vào hàm cha)
+=> giống lập trình c++, trả về con trỏ hàm
+
+*Arrow function vs function
+- Không truy cập được vào biến this
+
+*Callback:
++ Ủy quyền, truyền một hàm làm đối số của hàm khác
++ Chạy background (chạy nền), bất đồng bộ
++ Thường dùng trong nodejs
+
+*Promise
+*Await
+*Async
+-----------------------------------
+*Nodejs hoạt động theo cơ chế: callback, event-driven, non-blocking
+*Nodejs => server side
+*Event loop hoạt động theo mô hình observer của lập trình HĐT
